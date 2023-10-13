@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import AppShell from "../AppShell";
+import Loader from "../../Components/Loader";
 
 const DrugDetails = () => {
   const { drugName } = useParams();
@@ -43,7 +44,7 @@ const DrugDetails = () => {
   return (
     <AppShell heading="DRUG DETAILS">
       {loading ? (
-        <div>Loading...</div>
+        <Loader />
       ) : (
         <>
           {Object.keys(drug || {})?.length > 0 && (

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import AppShell from "../AppShell";
 import { Link } from "react-router-dom";
+import Loader from "../../Components/Loader";
 
 const Drugs = () => {
   const [searchKey, setSearchKey] = useState("");
@@ -61,23 +62,25 @@ const Drugs = () => {
           />
         </button>
       </div>
-      {error ? (
-        <h3>{error}</h3>
+      {loading ? (
+        <Loader />
       ) : (
-        <div>
-          <h3>Search Result</h3>
-          {loading ? (
-            <div>Loading...</div>
+        <>
+          {error ? (
+            <h3>{error}</h3>
           ) : (
-            <>
-              {drugs.map((i) => (
-                <div className="drug-results" key={i}>
-                  <Link to={`/drugs/${i}`}>{i}</Link>
-                </div>
-              ))}
-            </>
+            <div>
+              <h3>Search Result</h3>
+              <>
+                {drugs.map((i) => (
+                  <div className="drug-results" key={i}>
+                    <Link to={`/drugs/${i}`}>{i}</Link>
+                  </div>
+                ))}
+              </>
+            </div>
           )}
-        </div>
+        </>
       )}
     </AppShell>
   );
